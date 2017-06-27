@@ -43,7 +43,6 @@ function handlerAuth($login, $password, $userInfo) {
             }
         }
     }
-
     return 'Sign in, please!';
 }
 
@@ -51,7 +50,7 @@ function getUserInfo() {
     $userInfo = [];
     $users = file('db.txt');
     foreach ($users as $userRow){
-        $user = explode('|', $userRow);
+        $user = explode(' | ', $userRow);
         $userInfo[$user[0]] = $user;
     }
 

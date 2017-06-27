@@ -2,3 +2,4 @@ vadim | vadim1 | Vadim | Dnipro
 sasha | sasha1 | Sasha | Dnipro
 vasya | vasya1 | Vasya | Dnipro
 buben | buben1 | Vasiliy Pupkin | Zalupivki
+vanya | vanya1 | Ванек | Dnipro
