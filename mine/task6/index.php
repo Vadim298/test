@@ -23,18 +23,16 @@
  */
 
 session_start();
-file_get_contents('db.txt');
 
 if (isset($_GET['logout'])) {
     session_destroy();
 }
 
-if    (!empty($_SESSION['login']) && $_SESSION['login'] == $userLogin
-    /* && !empty($_SESSION['name']) && $_SESSION['name'] == $userName
-    && !empty($_SESSION['address']) && $_SESSION['address'] == $userAddress */){
+if (!empty($_SESSION['login'])) {
     header("location: profile.php");
-} elseif (isset($_POST['login'], $_POST['password'] /*, $_POST['name'], $_POST['address'] */)) {
-    $result = handlerAuth($_POST['login'], $_POST['password'], /* $_POST['name'], $_POST['address'] */);
+} elseif (isset($_POST['login'], $_POST['password'])) {
+    $userInfo = getUserInfo();
+    $result = handlerAuth($_POST['login'], $_POST['password'], $userInfo);
 
     if ($result === true) {
         header("location: profile.php");
@@ -47,18 +45,31 @@ if    (!empty($_SESSION['login']) && $_SESSION['login'] == $userLogin
 }
 
 
-function handlerAuth($login, $password, /* $name, $address */) {
-    global $userLogin;
-    global $userPass;
-    /*global $userName;
-    global $userAddress; */
+function handlerAuth($login, $password, $userInfo) {
 
-    if($login == $userLogin and $password == $userPass /* and $name == $userName and $address == $userAddress */){
-        $_SESSION['login']   = $_POST['login'];
-        /*$_SESSION['name']    = $_POST['name'];
-        $_SESSION['address'] = $_POST['address'];*/
-        return true;
-    } elseif($login != $userLogin or $password != $userPass or /* $name != $userName or $address != $userAddress*/ ){
-        return 'Я не знаю, что неправильно, так шо, давай заново все вводи!';
+    foreach ($userInfo as $key => $value) {
+        if ($login == $key) {
+            if($password == $value[1]){
+                $_SESSION['login']      = $value[0];
+                $_SESSION['username']   = $value[2];
+                $_SESSION['location']   = $value[3];
+                return true;
+            } else {
+                return 'Fail password!';
+            }
+        }
     }
+
+    return 'Sign in, please!';
+}
+
+function getUserInfo() {
+    $userInfo = [];
+    $users = file('db.txt');
+    foreach ($users as $userRow){
+        $user = explode('|', $userRow);
+        $userInfo[$user[0]] = $user;
+    }
+
+    return $userInfo;
 }
