@@ -5,6 +5,9 @@
  * Date: 27.06.17
  * Time: 8:47
  */
+/**
+ * Форма регистрации
+ */
 ?>
 <html>
 <form action="registration_form.php" method="post">
@@ -16,6 +19,10 @@
 </form>
 </html>
 <?php
+/**
+ * Отправка данных с формы регистрации в документ
+ * с логинами, паролями, именами и локациями
+ */
 if (isset($_POST['login'], $_POST['password'], $_POST['username'], $_POST['location'])) {
         $login = $_POST['login'];
         $password = $_POST['password'];

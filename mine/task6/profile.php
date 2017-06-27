@@ -6,6 +6,10 @@
  * Time: 13:22
  */
 session_start();
+/**
+ * Проверка состояния сессии
+ * Вывод нужных данных
+ */
 if (empty($_SESSION['login'])) {
     header('Location: index.php');
 } else {

@@ -7,11 +7,16 @@
  */
 
 session_start();
-
+/**
+ * Выход из сессии
+ */
 if (isset($_GET['logout'])) {
     session_destroy();
 }
 
+/**
+ * Проверка состояния аутентификации
+ */
 if (!empty($_SESSION['login'])) {
     header("location: profile.php");
 } elseif (isset($_POST['login'], $_POST['password'])) {
@@ -27,7 +32,12 @@ if (!empty($_SESSION['login'])) {
 } else {
     require_once 'form.php';
 }
-
+/**
+ * @param $login
+ * @param $password
+ * @param $userInfo
+ * @return bool|string
+ */
 
 function handlerAuth($login, $password, $userInfo) {
 
@@ -46,6 +56,9 @@ function handlerAuth($login, $password, $userInfo) {
     return 'Sign in, please!';
 }
 
+/**
+ * @return array
+ */
 function getUserInfo() {
     $userInfo = [];
     $users = file('db.txt');
