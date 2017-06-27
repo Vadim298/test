@@ -12,8 +12,8 @@
     <label>Придумайте пароль <input type="password" name="password"> </label><br>
     <label>Ваше имя <input type="text" name="username"> </label><br>
     <label>Ваше место пребывания <input type="text" name="location"> </label><br>
-    <label><input type="submit" value="отправить данные"></label><br>
-    <label>Уже есть аккаунт ----><a href="index.php?enter">Войти</a></label><br>
+    <label><input type="submit" value="отправить данные"> </label><br>
+    <label>Уже есть аккаунт ----><a href="index.php">Войти</a> </label><br>
 </form>
 </html>
 <?php
@@ -24,6 +24,5 @@
         $location = $_POST['location'];
         file_put_contents('db.txt', "$login | $password | $username | $location\n", FILE_APPEND);
     }
-
 ?>
 
