@@ -10,9 +10,9 @@
 | Time: 15:03         |
 +---------------------+
  */
-require_once 'superuser.php';
-class User
+class User extends AUser
 {
+    const INFO_TITLE = 'Данные пользователя: ';
     /**
      * @var
      */
@@ -26,7 +26,7 @@ class User
      * @param $l
      * @param $p
      */
-    function __construct($n='', $l='', $p='') {
+    public function __construct($n='', $l='', $p='') {
         try {
             if($n == '' or $l == '' or $p == '')
                 throw new Exception('Ввведены не все данные');
@@ -36,33 +36,43 @@ class User
         } catch (Exception $e){
             echo $e->getMessage();
         }
+    /**
+     * function of cloning data
+     */
     }
-    function __clone(){
+    public function __clone(){
         $this->login = "Guest";
         $this->password  = "qwerty";
     }
 
     /**
-     * function
+     * taking user info
      */
-    public function userInfo() {
-        echo "<p>Имя = " . $this->name,     '<br>';
-        echo "Логин  = " . $this->login,    '<br>';
-        echo "Пароль = " . $this->password, '<br>';
-    }
+     function getTitle() {
+            echo '<h3>' . (self::INFO_TITLE) . '</h3>';
+        }
+     function userInfo() {
+         echo "Имя = "    . $this->name, '<br>';
+         echo "Логин  = " . $this->login, '<br>';
+         echo "Пароль = " . $this->password, '<br>';
+     }
+     function getInfo(){
+         echo $this->getTitle() . $this->userInfo();
+     }
 }
 
 /**
  * Users
  */
+
 $Vadym = new User("Vadym", "Vadym1", "Vadym1");
-$Vadym->userInfo();
+$Vadym->getInfo();
 
 $Vasya = new User("Vasya", "Vasya1", "Vasya1");
-$Vasya->userInfo();
+$Vasya->getInfo();
 
 $Petya = new User("Petya", "Petya1", "Petya1");
-$Petya->userInfo();
+$Petya->getInfo();
 
 $Ivan = clone $Petya;
-$Ivan ->userInfo();
+$Ivan ->getInfo();

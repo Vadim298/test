@@ -22,8 +22,8 @@ class A
 class B extends A{
     public function bar(){
         echo $this->_a;
-        echo $this->_b;
+        //echo $this->_b;
     }
 }
 $o1 = new A();
-$o1->_b;
+//$o1->_b;

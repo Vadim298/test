@@ -10,7 +10,6 @@
 | Time: 17:22         |
 +---------------------+
  */
-
 /**
  * Class SuperUser
  */
@@ -21,11 +20,11 @@ class SuperUser extends User
         parent::    __construct($n, $l, $p);
         $this->role     = $r;
     }
-    public function userInfo() {
-        parent::    userInfo();
+    public function getInfo() {
+        parent::    getInfo();
         echo "Роль = "   . $this->role,     '<br>';
     }
 
 }
 $Admin = new SuperUser("Krasavcheg", "root", "password", "admin");
-$Admin->userInfo();
+$Admin->getInfo();
