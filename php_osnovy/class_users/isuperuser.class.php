@@ -7,12 +7,10 @@
 +---------------------+
 | Date: 04.07.17      |
 +---------------------+
-| Time: 13:58         |
+| Time: 14:31         |
 +---------------------+
  */
-require 'user.php';
-require 'superuser.php';
-abstract class AUser
-{
-    abstract function getInfo();
+
+interface ISuperUser{
+    function getUserInfo();
 }

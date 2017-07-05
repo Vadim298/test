@@ -13,16 +13,19 @@
 /**
  * Class SuperUser
  */
-require 'ISuperUser.php';
+
 //GetUserInfo отдает ассоциативный массив, в котором
 // имена ячеек это имена свойсвт объекта, а значения
 //ячеек это значения свойств объекта
 class SuperUser extends User implements ISuperUser
 {
     public $role;
+    static $countSuper = 0;
     public function __construct($n, $l, $p, $r) {
         parent::    __construct($n, $l, $p);
         $this->role     = $r;
+        self::$countSuper++;
+        parent::$count--;
     }
     public function getInfo() {
         parent::    getInfo();
@@ -38,5 +41,4 @@ class SuperUser extends User implements ISuperUser
     }
 
 }
-$Admin = new SuperUser("Krasavcheg", "root", "password", "admin");
-$Admin->getInfo();
+

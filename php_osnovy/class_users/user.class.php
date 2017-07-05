@@ -9,7 +9,7 @@
 +---------------------+
 | Time: 15:03         |
 +---------------------+
- */
+  */
 class User extends AUser
 {
     const INFO_TITLE = 'Данные пользователя: ';
@@ -19,6 +19,7 @@ class User extends AUser
     public $name;
     public $login;
     public $password;
+    static $count;
 
     /**
      * User constructor.
@@ -33,6 +34,7 @@ class User extends AUser
             $this->name = $n;
             $this->login = $l;
             $this->password = $p;
+            self::$count++;
         } catch (Exception $e){
             echo $e->getMessage();
         }
@@ -43,6 +45,7 @@ class User extends AUser
     public function __clone(){
         $this->login = "Guest";
         $this->password  = "qwerty";
+        self::$count++;
     }
 
     /**
@@ -61,18 +64,3 @@ class User extends AUser
      }
 }
 
-/**
- * Users
- */
-
-$Vadym = new User("Vadym", "Vadym1", "Vadym1");
-$Vadym->getInfo();
-
-$Vasya = new User("Vasya", "Vasya1", "Vasya1");
-$Vasya->getInfo();
-
-$Petya = new User("Petya", "Petya1", "Petya1");
-$Petya->getInfo();
-
-$Ivan = clone $Petya;
-$Ivan ->getInfo();
